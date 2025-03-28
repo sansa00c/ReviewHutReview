@@ -150,7 +150,7 @@
       const badTags = Array.from(form.querySelectorAll('input[name="badTags"]:checked')).map(cb => cb.value);
 
       const functions = firebase.functions();
-      const submitReview = functions.httpsCallable("submitAnonymousReview");
+      const submitReview = firebase.app().functions().httpsCallable("submitAnonymousReview");
 
       try {
         await submitReview({
