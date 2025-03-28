@@ -1,11 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-  <div class="header-image">
-  <img src="logo.png" alt="Review Hut Logo" />
-  </div>
-
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Leave a Review</title>
@@ -16,16 +11,24 @@
 
   <style>
     body {
-  font-family: sans-serif;
-  max-width: 600px;
-  margin: 2rem auto;
-  padding: 1rem;
-  background-color: #000000;
-  color: white;
-}
+      font-family: sans-serif;
+      max-width: 600px;
+      margin: 2rem auto;
+      padding: 1.5rem;
+      background-color: #000000;
+      color: white;
+      line-height: 1.5;
+    }
+    
+    h2 {
+      margin-top: 0;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+    
     .header-image {
       text-align: center;
-      margin-bottom: 1.5rem;
+      margin-bottom: 2rem;
     }
     
     .header-image img {
@@ -33,19 +36,29 @@
       height: auto;
     }
 
-    .star-rating-wrapper {
-  direction: ltr;
-  display: flex;
-  justify-content: flex-start;
-}
+    .form-section {
+      margin-bottom: 2rem;
+    }
+    
+    .section-title {
+      font-weight: bold;
+      margin-bottom: 0.75rem;
+    }
 
-.star-rating {
-  font-size: 2rem;
-  direction: rtl;
-  display: flex;
-  gap: 10px;
-  cursor: pointer;
-}
+    .star-rating-wrapper {
+      direction: ltr;
+      display: flex;
+      justify-content: flex-start;
+      margin-bottom: 0.5rem;
+    }
+
+    .star-rating {
+      font-size: 2rem;
+      direction: rtl;
+      display: flex;
+      gap: 10px;
+      cursor: pointer;
+    }
 
     .star-rating input {
       display: none;
@@ -65,99 +78,138 @@
     .tag-list {
       display: flex;
       flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 1rem;
+      gap: 10px;
+      margin-bottom: 1.5rem;
     }
 
     label.tag span {
-  background-color: transparent;
-  color: white;
-  padding: 6px 10px;
-  border-radius: 20px;
-  border: 2px solid white;
-  transition: all 0.2s ease;
-  display: inline-block;
-  cursor: pointer;
-}
+      background-color: transparent;
+      color: white;
+      padding: 8px 12px;
+      border-radius: 20px;
+      border: 2px solid white;
+      transition: all 0.2s ease;
+      display: inline-block;
+      cursor: pointer;
+    }
 
-/* Checked (selected) tag appearance */
-input[type="checkbox"]:checked + span {
-  background-color: #0030D1; /* trustBlue */
-  color: white;
-  border: 2px solid #0030D1;
-}
+    /* Checked (selected) tag appearance */
+    input[type="checkbox"]:checked + span {
+      background-color: #0030D1; /* trustBlue */
+      color: white;
+      border: 2px solid #0030D1;
+    }
 
-/* Hide native checkboxes */
-input[type="checkbox"] {
-  display: none;
-}
+    /* Hide native checkboxes */
+    input[type="checkbox"] {
+      display: none;
+    }
 
-form label {
-  display: block;
-  margin-bottom: 0.5rem;
-}
+    .deal-type-options {
+      display: flex;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
 
+    .deal-type-label {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .deal-type-label input {
+      margin-right: 8px;
+    }
+
+    button[type="submit"] {
+      background-color: #0030D1;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 4px;
+      font-size: 1rem;
+      cursor: pointer;
+      width: 100%;
+      transition: background-color 0.2s;
+    }
+
+    button[type="submit"]:hover {
+      background-color: #002bb8;
+    }
   </style>
 </head>
 <body>
+  <div class="header-image">
+    <img src="logo.png" alt="Review Hut Logo" />
+  </div>
+
   <h2>Leave a Review</h2>
 
   <form id="review-form">
-    <label><strong>Star Rating:</strong></label><br />
-    <div class="star-rating-wrapper">
-  <div class="star-rating">
-    <input type="radio" id="star5" name="stars" value="5" required />
-    <label for="star5">&#9733;</label>
-    <input type="radio" id="star4" name="stars" value="4" />
-    <label for="star4">&#9733;</label>
-    <input type="radio" id="star3" name="stars" value="3" />
-    <label for="star3">&#9733;</label>
-    <input type="radio" id="star2" name="stars" value="2" />
-    <label for="star2">&#9733;</label>
-    <input type="radio" id="star1" name="stars" value="1" />
-    <label for="star1">&#9733;</label>
-  </div>
-</div>
-
-
-    <label><strong>Tag what they did well:</strong></label>
-    <div class="tag-list">
-      <label class="tag"><input type="checkbox" name="goodTags" value="Fast Shipping" /><span>Fast Shipping</span></label>
-      <label class="tag"><input type="checkbox" name="goodTags" value="Secure Packaging" /><span>Secure Packaging</span></label>
-      <label class="tag"><input type="checkbox" name="goodTags" value="Responsive" /><span>Responsive</span></label>
-      <label class="tag"><input type="checkbox" name="goodTags" value="Informative" /><span>Informative</span></label>
-      <label class="tag"><input type="checkbox" name="goodTags" value="Free Returns" /><span>Free Returns</span></label>
-      <label class="tag"><input type="checkbox" name="goodTags" value="Item as Described" /><span>Item as Described</span></label>
-      <label class="tag"><input type="checkbox" name="goodTags" value="Great Communication" /><span>Great Communication</span></label>
-      <label class="tag"><input type="checkbox" name="goodTags" value="Trustworthy" /><span>Trustworthy</span></label>
-      <label class="tag"><input type="checkbox" name="goodTags" value="Fair Pricing" /><span>Fair Pricing</span></label>
-      <label class="tag"><input type="checkbox" name="goodTags" value="Repeat Buyer/Seller" /><span>Repeat Buyer/Seller</span></label>
-      <label class="tag"><input type="checkbox" name="goodTags" value="Accurate Photos" /><span>Accurate Photos</span></label>
-      <label class="tag"><input type="checkbox" name="goodTags" value="Smooth Transaction" /><span>Smooth Transaction</span></label>
-      <label class="tag"><input type="checkbox" name="goodTags" value="Excellent Condition" /><span>Excellent Condition</span></label>
-      <label class="tag"><input type="checkbox" name="goodTags" value="Highly Recommended" /><span>Highly Recommended</span></label>
-      <label class="tag"><input type="checkbox" name="goodTags" value="Quick Response" /><span>Quick Response</span></label>
-      <label class="tag"><input type="checkbox" name="goodTags" value="Great Deals" /><span>Great Deals</span></label>
-      <label class="tag"><input type="checkbox" name="goodTags" value="Easy to Work With" /><span>Easy to Work With</span></label>
-      <label class="tag"><input type="checkbox" name="goodTags" value="Flexible" /><span>Flexible</span></label>
-      <label class="tag"><input type="checkbox" name="goodTags" value="No Issues" /><span>No Issues</span></label>
+    <div class="form-section">
+      <div class="section-title">Star Rating:</div>
+      <div class="star-rating-wrapper">
+        <div class="star-rating">
+          <input type="radio" id="star5" name="stars" value="5" required />
+          <label for="star5">&#9733;</label>
+          <input type="radio" id="star4" name="stars" value="4" />
+          <label for="star4">&#9733;</label>
+          <input type="radio" id="star3" name="stars" value="3" />
+          <label for="star3">&#9733;</label>
+          <input type="radio" id="star2" name="stars" value="2" />
+          <label for="star2">&#9733;</label>
+          <input type="radio" id="star1" name="stars" value="1" />
+          <label for="star1">&#9733;</label>
+        </div>
+      </div>
     </div>
 
-    <label><strong>Tag what they did not do well:</strong></label>
-    <div class="tag-list">
-      <label class="tag"><input type="checkbox" name="badTags" value="Poor Communication" /><span>Poor Communication</span></label>
-      <label class="tag"><input type="checkbox" name="badTags" value="Misleading Description" /><span>Misleading Description</span></label>
-      <label class="tag"><input type="checkbox" name="badTags" value="Damaged Item" /><span>Damaged Item</span></label>
-      <label class="tag"><input type="checkbox" name="badTags" value="Inaccurate Photos" /><span>Inaccurate Photos</span></label>
-      <label class="tag"><input type="checkbox" name="badTags" value="Poor Packaging" /><span>Poor Packaging</span></label>
-      <label class="tag"><input type="checkbox" name="badTags" value="Not as Advertised" /><span>Not as Advertised</span></label>
-      <label class="tag"><input type="checkbox" name="badTags" value="Delayed Payment" /><span>Delayed Payment</span></label>
-      <label class="tag"><input type="checkbox" name="badTags" value="Hidden Issues" /><span>Hidden Issues</span></label>
+    <div class="form-section">
+      <div class="section-title">Tag what they did well:</div>
+      <div class="tag-list">
+        <label class="tag"><input type="checkbox" name="goodTags" value="Fast Shipping" /><span>Fast Shipping</span></label>
+        <label class="tag"><input type="checkbox" name="goodTags" value="Secure Packaging" /><span>Secure Packaging</span></label>
+        <label class="tag"><input type="checkbox" name="goodTags" value="Responsive" /><span>Responsive</span></label>
+        <label class="tag"><input type="checkbox" name="goodTags" value="Informative" /><span>Informative</span></label>
+        <label class="tag"><input type="checkbox" name="goodTags" value="Free Returns" /><span>Free Returns</span></label>
+        <label class="tag"><input type="checkbox" name="goodTags" value="Item as Described" /><span>Item as Described</span></label>
+        <label class="tag"><input type="checkbox" name="goodTags" value="Great Communication" /><span>Great Communication</span></label>
+        <label class="tag"><input type="checkbox" name="goodTags" value="Trustworthy" /><span>Trustworthy</span></label>
+        <label class="tag"><input type="checkbox" name="goodTags" value="Fair Pricing" /><span>Fair Pricing</span></label>
+        <label class="tag"><input type="checkbox" name="goodTags" value="Repeat Buyer/Seller" /><span>Repeat Buyer/Seller</span></label>
+        <label class="tag"><input type="checkbox" name="goodTags" value="Accurate Photos" /><span>Accurate Photos</span></label>
+        <label class="tag"><input type="checkbox" name="goodTags" value="Smooth Transaction" /><span>Smooth Transaction</span></label>
+        <label class="tag"><input type="checkbox" name="goodTags" value="Excellent Condition" /><span>Excellent Condition</span></label>
+        <label class="tag"><input type="checkbox" name="goodTags" value="Highly Recommended" /><span>Highly Recommended</span></label>
+        <label class="tag"><input type="checkbox" name="goodTags" value="Quick Response" /><span>Quick Response</span></label>
+        <label class="tag"><input type="checkbox" name="goodTags" value="Great Deals" /><span>Great Deals</span></label>
+        <label class="tag"><input type="checkbox" name="goodTags" value="Easy to Work With" /><span>Easy to Work With</span></label>
+        <label class="tag"><input type="checkbox" name="goodTags" value="Flexible" /><span>Flexible</span></label>
+        <label class="tag"><input type="checkbox" name="goodTags" value="No Issues" /><span>No Issues</span></label>
+      </div>
     </div>
 
-    <label><strong>Deal Type:</strong></label><br />
-    <label><input type="radio" name="dealType" value="Shipping" required /> Shipping</label><br />
-    <label><input type="radio" name="dealType" value="In-Person" required /> In-Person</label><br /><br />
+    <div class="form-section">
+      <div class="section-title">Tag what they did not do well:</div>
+      <div class="tag-list">
+        <label class="tag"><input type="checkbox" name="badTags" value="Poor Communication" /><span>Poor Communication</span></label>
+        <label class="tag"><input type="checkbox" name="badTags" value="Misleading Description" /><span>Misleading Description</span></label>
+        <label class="tag"><input type="checkbox" name="badTags" value="Damaged Item" /><span>Damaged Item</span></label>
+        <label class="tag"><input type="checkbox" name="badTags" value="Inaccurate Photos" /><span>Inaccurate Photos</span></label>
+        <label class="tag"><input type="checkbox" name="badTags" value="Poor Packaging" /><span>Poor Packaging</span></label>
+        <label class="tag"><input type="checkbox" name="badTags" value="Not as Advertised" /><span>Not as Advertised</span></label>
+        <label class="tag"><input type="checkbox" name="badTags" value="Delayed Payment" /><span>Delayed Payment</span></label>
+        <label class="tag"><input type="checkbox" name="badTags" value="Hidden Issues" /><span>Hidden Issues</span></label>
+      </div>
+    </div>
+
+    <div class="form-section">
+      <div class="section-title">Deal Type:</div>
+      <div class="deal-type-options">
+        <label class="deal-type-label"><input type="radio" name="dealType" value="Shipping" required /> Shipping</label>
+        <label class="deal-type-label"><input type="radio" name="dealType" value="In-Person" /> In-Person</label>
+      </div>
+    </div>
 
     <button type="submit">Submit Review</button>
   </form>
@@ -195,18 +247,18 @@ form label {
     const dealType = form.querySelector('input[name="dealType"]:checked')?.value;
 
     if (!dealType) {
-  alert("Please select a deal type.");
-  return;
-}
+      alert("Please select a deal type.");
+      return;
+    }
 
     const payload = {
-  inviteID,
-  stars,
-  goodTags,
-  badTags,
-  reviewerIDTo,
-  dealType
-};
+      inviteID,
+      stars,
+      goodTags,
+      badTags,
+      reviewerIDTo,
+      dealType
+    };
 
     console.log("📤 Submitting payload:", payload);
 
@@ -219,6 +271,6 @@ form label {
       alert("Error submitting review: " + error.message);
     }
   });
-</script>
+  </script>
 </body>
 </html>
