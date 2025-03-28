@@ -10,111 +10,114 @@
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-functions-compat.js"></script>
 
   <style>
-    body {
-      font-family: sans-serif;
-      max-width: 600px;
-      margin: 2rem auto;
-      padding: 1rem;
-      background-color: #000000;
-      color: white;
-    }
+  body {
+    font-family: sans-serif;
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 1rem;
+    background-color: #000000;
+    color: white;
+  }
 
-    .header-image {
-      text-align: center;
-      margin-bottom: 2rem;
-    }
+  .header-image {
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
 
-    .header-image img {
-      max-width: 100px;
-      height: auto;
-    }
+  .header-image img {
+    max-width: 100px;
+    height: auto;
+  }
 
-    h2 {
-      margin-top: 0;
-      margin-bottom: 2rem;
-    }
+  h2 {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+  }
 
-    form label {
-      display: block;
-      margin-top: 2rem;
-      font-weight: bold;
-    }
+  form label {
+    display: block;
+    margin-top: 1.25rem;
+    margin-bottom: 0.25rem;
+    font-weight: bold;
+  }
 
-    .star-rating-wrapper {
-      direction: ltr;
-      display: flex;
-      justify-content: flex-start;
-      margin-top: 0.5rem;
-      margin-bottom: 2rem;
-    }
+  .star-rating-wrapper {
+    direction: ltr;
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 1rem;
+  }
 
-    .star-rating {
-      font-size: 2rem;
-      direction: rtl;
-      display: flex;
-      gap: 10px;
-      cursor: pointer;
-    }
+  .star-rating {
+    font-size: 2rem;
+    direction: rtl;
+    display: flex;
+    gap: 10px;
+    cursor: pointer;
+  }
 
-    .star-rating input {
-      display: none;
-    }
+  .star-rating input {
+    display: none;
+  }
 
-    .star-rating label {
-      color: lightgray;
-      transition: color 0.2s;
-    }
+  .star-rating label {
+    color: lightgray;
+    transition: color 0.2s;
+  }
 
-    .star-rating input:checked ~ label,
-    .star-rating label:hover,
-    .star-rating label:hover ~ label {
-      color: gold;
-    }
+  .star-rating input:checked ~ label,
+  .star-rating label:hover,
+  .star-rating label:hover ~ label {
+    color: gold;
+  }
 
-    .tag-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 0.5rem;
-      margin-bottom: 2rem;
-    }
+  .tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 1rem;
+  }
 
-    label.tag span {
-      background-color: transparent;
-      color: white;
-      padding: 6px 10px;
-      border-radius: 20px;
-      border: 2px solid white;
-      transition: all 0.2s ease;
-      display: inline-block;
-      cursor: pointer;
-    }
+  label.tag span {
+    background-color: transparent;
+    color: white;
+    padding: 6px 10px;
+    border-radius: 20px;
+    border: 2px solid white;
+    transition: all 0.2s ease;
+    display: inline-block;
+    cursor: pointer;
+  }
 
-    input[type="checkbox"]:checked + span {
-      background-color: #0030D1;
-      color: white;
-      border: 2px solid #0030D1;
-    }
+  input[type="checkbox"]:checked + span {
+    background-color: #0030D1;
+    color: white;
+    border: 2px solid #0030D1;
+  }
 
-    input[type="checkbox"] {
-      display: none;
-    }
+  input[type="checkbox"] {
+    display: none;
+  }
 
-    button[type="submit"] {
-      margin-top: 2rem;
-      padding: 0.5rem 1rem;
-      font-weight: bold;
-      border-radius: 6px;
-      border: none;
-      background-color: white;
-      color: black;
-      cursor: pointer;
-    }
+  input[type="radio"] {
+    margin-right: 6px;
+  }
 
-    button[type="submit"]:hover {
-      background-color: #f0f0f0;
-    }
-  </style>
+  button[type="submit"] {
+    margin-top: 1.5rem;
+    padding: 0.4rem 1rem;
+    font-weight: bold;
+    border-radius: 6px;
+    border: none;
+    background-color: white;
+    color: black;
+    cursor: pointer;
+  }
+
+  button[type="submit"]:hover {
+    background-color: #f0f0f0;
+  }
+</style>
 </head>
 <body>
   <div class="header-image">
