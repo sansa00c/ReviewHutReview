@@ -122,53 +122,55 @@
   </form>
 
   <script>
-    const firebaseConfig = {
-      apiKey: "AIzaSyAy7isvF3tKX5e2C8UItBh_lo-o14y_zVE",
-      authDomain: "review-hut-bcff1.firebaseapp.com",
-      projectId: "review-hut-bcff1",
-      appId: "1:901708014175:web:6d6a22a703e94cd311b1ea"
+  const firebaseConfig = {
+    apiKey: "AIzaSyAy7isvF3tKX5e2C8UItBh_lo-o14y_zVE",
+    authDomain: "review-hut-bcff1.firebaseapp.com",
+    projectId: "review-hut-bcff1",
+    appId: "1:901708014175:web:6d6a22a703e94cd311b1ea"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const inviteID = urlParams.get("invite");
+  const reviewerIDTo = urlParams.get("to");
+
+  document.getElementById("review-form").addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const form = e.target;
+    const stars = form.querySelector('input[name="stars"]:checked')?.value;
+
+    if (!stars || !inviteID || !reviewerIDTo) {
+      alert("Missing invite ID, reviewer ID, or star rating.");
+      return;
+    }
+
+    const goodTags = Array.from(form.querySelectorAll('input[name="goodTags"]:checked')).map(cb => cb.value);
+    const badTags = Array.from(form.querySelectorAll('input[name="badTags"]:checked')).map(cb => cb.value);
+
+    const submitReview = firebase.app().functions().httpsCallable("submitAnonymousReview");
+
+    const payload = {
+      inviteID,
+      stars,
+      goodTags,
+      badTags,
+      reviewerIDTo,
+      dealType: "Trade"
     };
 
-    firebase.initializeApp(firebaseConfig);
+    console.log("📤 Submitting payload:", payload);
 
-    const urlParams = new URLSearchParams(window.location.search);
-    const inviteID = urlParams.get("invite");
-    const reviewerIDTo = urlParams.get("to");
-
-    document.getElementById("review-form").addEventListener("submit", async (e) => {
-      e.preventDefault();
-
-      const form = e.target;
-      const stars = form.querySelector('input[name="stars"]:checked')?.value;
-
-      if (!stars || !inviteID || !reviewerIDTo) {
-        alert("Missing invite ID, reviewer ID, or star rating.");
-        return;
-      }
-
-      const goodTags = Array.from(form.querySelectorAll('input[name="goodTags"]:checked')).map(cb => cb.value);
-      const badTags = Array.from(form.querySelectorAll('input[name="badTags"]:checked')).map(cb => cb.value);
-
-      const functions = firebase.functions();
-      const submitReview = firebase.app().functions().httpsCallable("submitAnonymousReview");
-
-      try {
-        await submitReview({
-          inviteID,
-          stars,
-          goodTags,
-          badTags,
-          reviewerIDTo,
-          dealType: "Trade" // optional
-        });
-
-        alert("Thanks! Your review was submitted.");
-        form.reset();
-      } catch (error) {
-        console.error(error);
-        alert("Error submitting review: " + error.message);
-      }
-    });
-  </script>
+    try {
+      await submitReview(payload);
+      alert("Thanks! Your review was submitted.");
+      form.reset();
+    } catch (error) {
+      console.error("❌ Error from Firebase function:", error);
+      alert("Error submitting review: " + error.message);
+    }
+  });
+</script>
 </body>
 </html>
