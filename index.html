@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Leave a Review</title>
+</head>
+<body>
+  <h2>Leave a Review</h2>
+  <form id="review-form">
+    <label>Stars (1–5):</label><br />
+    <input type="number" name="stars" min="1" max="5" required /><br /><br />
+    <label>Review:</label><br />
+    <textarea name="text" rows="4" cols="40" required></textarea><br /><br />
+    <button type="submit">Submit Review</button>
+  </form>
+
+  <script>
+    const inviteID = new URLSearchParams(window.location.search).get("invite");
+
+    document.getElementById("review-form").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const stars = e.target.stars.value;
+      const text = e.target.text.value;
+
+      const res = await fetch("https://us-central1-YOUR_PROJECT.cloudfunctions.net/submitAnonymousReview", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ inviteID, stars, text })
+      });
+
+      if (res.ok) {
+        alert("Thanks! Your review was submitted.");
+      } else {
+        const err = await res.text();
+        alert("Error: " + err);
+      }
+    });
+  </script>
+</body>
+</html>
