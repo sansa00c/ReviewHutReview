@@ -118,6 +118,10 @@
       <label class="tag"><input type="checkbox" name="badTags" value="Hidden Issues" /><span>Hidden Issues</span></label>
     </div>
 
+    <label><strong>Deal Type:</strong></label><br />
+    <label><input type="radio" name="dealType" value="Shipping" required /> Shipping</label><br />
+    <label><input type="radio" name="dealType" value="In-Person" required /> In-Person</label><br /><br />
+
     <button type="submit">Submit Review</button>
   </form>
 
@@ -151,14 +155,21 @@
 
     const submitReview = firebase.app().functions().httpsCallable("submitAnonymousReview");
 
+    const dealType = form.querySelector('input[name="dealType"]:checked')?.value;
+
+    if (!dealType) {
+  alert("Please select a deal type.");
+  return;
+}
+
     const payload = {
-      inviteID,
-      stars,
-      goodTags,
-      badTags,
-      reviewerIDTo,
-      dealType: "Trade"
-    };
+  inviteID,
+  stars,
+  goodTags,
+  badTags,
+  reviewerIDTo,
+  dealType
+};
 
     console.log("📤 Submitting payload:", payload);
 
