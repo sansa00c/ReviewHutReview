@@ -51,19 +51,20 @@
     }
 
     label.tag span {
-      background-color: #0030D1; /* trustBlue */
+      background-color: transparent;
       color: white;
       padding: 6px 10px;
       border-radius: 20px;
-      border: 2px solid transparent;
+      border: 2px solid white;
       transition: all 0.2s ease;
       display: inline-block;
+      cursor: pointer;
     }
-
+    
     input[type="checkbox"]:checked + span {
-      background-color: transparent;
+      background-color: #0030D1; /* trustBlue */
       color: white;
-      border: 2px solid white;
+      border: 2px solid #0030D1;
     }
     
     input[type="checkbox"] {
