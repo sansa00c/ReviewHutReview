@@ -33,14 +33,19 @@
       height: auto;
     }
 
-    .star-rating {
-      font-size: 2rem;
-      direction: rtl;                 /* keep this to reverse visual order */
-      display: flex;
-      justify-content: flex-start;   /* move alignment to the left */
-      gap: 10px;
-      cursor: pointer;
-    }
+    .star-rating-wrapper {
+  direction: ltr;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.star-rating {
+  font-size: 2rem;
+  direction: rtl;
+  display: flex;
+  gap: 10px;
+  cursor: pointer;
+}
 
     .star-rating input {
       display: none;
@@ -93,18 +98,21 @@ input[type="checkbox"] {
 
   <form id="review-form">
     <label><strong>Star Rating:</strong></label><br />
-    <div class="star-rating">
-      <input type="radio" id="star5" name="stars" value="5" required />
-      <label for="star5">&#9733;</label>
-      <input type="radio" id="star4" name="stars" value="4" />
-      <label for="star4">&#9733;</label>
-      <input type="radio" id="star3" name="stars" value="3" />
-      <label for="star3">&#9733;</label>
-      <input type="radio" id="star2" name="stars" value="2" />
-      <label for="star2">&#9733;</label>
-      <input type="radio" id="star1" name="stars" value="1" />
-      <label for="star1">&#9733;</label>
-    </div><br />
+    <div class="star-rating-wrapper">
+  <div class="star-rating">
+    <input type="radio" id="star5" name="stars" value="5" required />
+    <label for="star5">&#9733;</label>
+    <input type="radio" id="star4" name="stars" value="4" />
+    <label for="star4">&#9733;</label>
+    <input type="radio" id="star3" name="stars" value="3" />
+    <label for="star3">&#9733;</label>
+    <input type="radio" id="star2" name="stars" value="2" />
+    <label for="star2">&#9733;</label>
+    <input type="radio" id="star1" name="stars" value="1" />
+    <label for="star1">&#9733;</label>
+  </div>
+</div>
+
 
     <label><strong>Tag what they did well:</strong></label>
     <div class="tag-list">
