@@ -11,21 +11,49 @@
       margin: 2rem auto;
       padding: 1rem;
     }
+
+    .star-rating {
+      font-size: 2rem;
+      direction: rtl;
+      display: flex;
+      justify-content: flex-start;
+      gap: 10px;
+      cursor: pointer;
+    }
+
+    .star-rating input {
+      display: none;
+    }
+
+    .star-rating label {
+      color: lightgray;
+      transition: color 0.2s;
+    }
+
+    .star-rating input:checked ~ label,
+    .star-rating label:hover,
+    .star-rating label:hover ~ label {
+      color: gold;
+    }
+
     .tag-list {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
       margin-bottom: 1rem;
     }
+
     label.tag {
       background: #f0f0f0;
       padding: 6px 10px;
       border-radius: 20px;
       cursor: pointer;
     }
+
     input[type="checkbox"] {
       display: none;
     }
+
     input[type="checkbox"]:checked + span {
       background-color: #007bff;
       color: white;
@@ -36,8 +64,19 @@
   <h2>Leave a Review</h2>
 
   <form id="review-form">
-    <label>Star Rating (1–5):</label><br />
-    <input type="number" name="stars" min="1" max="5" required /><br /><br />
+    <label><strong>Star Rating:</strong></label><br />
+    <div class="star-rating">
+      <input type="radio" id="star5" name="stars" value="5" required />
+      <label for="star5">&#9733;</label>
+      <input type="radio" id="star4" name="stars" value="4" />
+      <label for="star4">&#9733;</label>
+      <input type="radio" id="star3" name="stars" value="3" />
+      <label for="star3">&#9733;</label>
+      <input type="radio" id="star2" name="stars" value="2" />
+      <label for="star2">&#9733;</label>
+      <input type="radio" id="star1" name="stars" value="1" />
+      <label for="star1">&#9733;</label>
+    </div><br />
 
     <label><strong>Tag what they did well:</strong></label>
     <div class="tag-list">
@@ -74,9 +113,6 @@
       <label class="tag"><input type="checkbox" name="badTags" value="Hidden Issues" /><span>Hidden Issues</span></label>
     </div>
 
-    <label>Additional Comments:</label><br />
-    <textarea name="text" rows="4" cols="40"></textarea><br /><br />
-
     <button type="submit">Submit Review</button>
   </form>
 
@@ -86,10 +122,13 @@
     document.getElementById("review-form").addEventListener("submit", async (e) => {
       e.preventDefault();
       const form = e.target;
-      const stars = form.stars.value;
-      const text = form.text.value;
+      const stars = form.querySelector('input[name="stars"]:checked')?.value;
 
-      // Get selected good and bad tags
+      if (!stars) {
+        alert("Please select a star rating.");
+        return;
+      }
+
       const goodTags = Array.from(form.querySelectorAll('input[name="goodTags"]:checked'))
                             .map(checkbox => checkbox.value);
       const badTags = Array.from(form.querySelectorAll('input[name="badTags"]:checked'))
@@ -98,7 +137,7 @@
       const res = await fetch("https://us-central1-YOUR_PROJECT.cloudfunctions.net/submitAnonymousReview", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ inviteID, stars, text, goodTags, badTags })
+        body: JSON.stringify({ inviteID, stars, goodTags, badTags })
       });
 
       if (res.ok) {
