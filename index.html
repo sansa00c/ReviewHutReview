@@ -15,6 +15,7 @@
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
+      margin-bottom: 1rem;
     }
     label.tag {
       background: #f0f0f0;
@@ -38,29 +39,40 @@
     <label>Star Rating (1–5):</label><br />
     <input type="number" name="stars" min="1" max="5" required /><br /><br />
 
-    <label>Select all that apply:</label>
+    <label><strong>Tag what they did well:</strong></label>
     <div class="tag-list">
-      <!-- Tags as checkboxes -->
-      <label class="tag"><input type="checkbox" name="tags" value="Fast Shipping" /><span>Fast Shipping</span></label>
-      <label class="tag"><input type="checkbox" name="tags" value="Secure Packaging" /><span>Secure Packaging</span></label>
-      <label class="tag"><input type="checkbox" name="tags" value="Responsive" /><span>Responsive</span></label>
-      <label class="tag"><input type="checkbox" name="tags" value="Informative" /><span>Informative</span></label>
-      <label class="tag"><input type="checkbox" name="tags" value="Free Returns" /><span>Free Returns</span></label>
-      <label class="tag"><input type="checkbox" name="tags" value="Item as Described" /><span>Item as Described</span></label>
-      <label class="tag"><input type="checkbox" name="tags" value="Great Communication" /><span>Great Communication</span></label>
-      <label class="tag"><input type="checkbox" name="tags" value="Trustworthy" /><span>Trustworthy</span></label>
-      <label class="tag"><input type="checkbox" name="tags" value="Fair Pricing" /><span>Fair Pricing</span></label>
-      <label class="tag"><input type="checkbox" name="tags" value="Repeat Buyer/Seller" /><span>Repeat Buyer/Seller</span></label>
-      <label class="tag"><input type="checkbox" name="tags" value="Accurate Photos" /><span>Accurate Photos</span></label>
-      <label class="tag"><input type="checkbox" name="tags" value="Smooth Transaction" /><span>Smooth Transaction</span></label>
-      <label class="tag"><input type="checkbox" name="tags" value="Excellent Condition" /><span>Excellent Condition</span></label>
-      <label class="tag"><input type="checkbox" name="tags" value="Highly Recommended" /><span>Highly Recommended</span></label>
-      <label class="tag"><input type="checkbox" name="tags" value="Quick Response" /><span>Quick Response</span></label>
-      <label class="tag"><input type="checkbox" name="tags" value="Great Deals" /><span>Great Deals</span></label>
-      <label class="tag"><input type="checkbox" name="tags" value="Easy to Work With" /><span>Easy to Work With</span></label>
-      <label class="tag"><input type="checkbox" name="tags" value="Flexible" /><span>Flexible</span></label>
-      <label class="tag"><input type="checkbox" name="tags" value="No Issues" /><span>No Issues</span></label>
-    </div><br />
+      <label class="tag"><input type="checkbox" name="goodTags" value="Fast Shipping" /><span>Fast Shipping</span></label>
+      <label class="tag"><input type="checkbox" name="goodTags" value="Secure Packaging" /><span>Secure Packaging</span></label>
+      <label class="tag"><input type="checkbox" name="goodTags" value="Responsive" /><span>Responsive</span></label>
+      <label class="tag"><input type="checkbox" name="goodTags" value="Informative" /><span>Informative</span></label>
+      <label class="tag"><input type="checkbox" name="goodTags" value="Free Returns" /><span>Free Returns</span></label>
+      <label class="tag"><input type="checkbox" name="goodTags" value="Item as Described" /><span>Item as Described</span></label>
+      <label class="tag"><input type="checkbox" name="goodTags" value="Great Communication" /><span>Great Communication</span></label>
+      <label class="tag"><input type="checkbox" name="goodTags" value="Trustworthy" /><span>Trustworthy</span></label>
+      <label class="tag"><input type="checkbox" name="goodTags" value="Fair Pricing" /><span>Fair Pricing</span></label>
+      <label class="tag"><input type="checkbox" name="goodTags" value="Repeat Buyer/Seller" /><span>Repeat Buyer/Seller</span></label>
+      <label class="tag"><input type="checkbox" name="goodTags" value="Accurate Photos" /><span>Accurate Photos</span></label>
+      <label class="tag"><input type="checkbox" name="goodTags" value="Smooth Transaction" /><span>Smooth Transaction</span></label>
+      <label class="tag"><input type="checkbox" name="goodTags" value="Excellent Condition" /><span>Excellent Condition</span></label>
+      <label class="tag"><input type="checkbox" name="goodTags" value="Highly Recommended" /><span>Highly Recommended</span></label>
+      <label class="tag"><input type="checkbox" name="goodTags" value="Quick Response" /><span>Quick Response</span></label>
+      <label class="tag"><input type="checkbox" name="goodTags" value="Great Deals" /><span>Great Deals</span></label>
+      <label class="tag"><input type="checkbox" name="goodTags" value="Easy to Work With" /><span>Easy to Work With</span></label>
+      <label class="tag"><input type="checkbox" name="goodTags" value="Flexible" /><span>Flexible</span></label>
+      <label class="tag"><input type="checkbox" name="goodTags" value="No Issues" /><span>No Issues</span></label>
+    </div>
+
+    <label><strong>Tag what they did not do well:</strong></label>
+    <div class="tag-list">
+      <label class="tag"><input type="checkbox" name="badTags" value="Poor Communication" /><span>Poor Communication</span></label>
+      <label class="tag"><input type="checkbox" name="badTags" value="Misleading Description" /><span>Misleading Description</span></label>
+      <label class="tag"><input type="checkbox" name="badTags" value="Damaged Item" /><span>Damaged Item</span></label>
+      <label class="tag"><input type="checkbox" name="badTags" value="Inaccurate Photos" /><span>Inaccurate Photos</span></label>
+      <label class="tag"><input type="checkbox" name="badTags" value="Poor Packaging" /><span>Poor Packaging</span></label>
+      <label class="tag"><input type="checkbox" name="badTags" value="Not as Advertised" /><span>Not as Advertised</span></label>
+      <label class="tag"><input type="checkbox" name="badTags" value="Delayed Payment" /><span>Delayed Payment</span></label>
+      <label class="tag"><input type="checkbox" name="badTags" value="Hidden Issues" /><span>Hidden Issues</span></label>
+    </div>
 
     <label>Additional Comments:</label><br />
     <textarea name="text" rows="4" cols="40"></textarea><br /><br />
@@ -77,14 +89,16 @@
       const stars = form.stars.value;
       const text = form.text.value;
 
-      // Get selected tags
-      const selectedTags = Array.from(form.querySelectorAll('input[name="tags"]:checked'))
-                                .map(checkbox => checkbox.value);
+      // Get selected good and bad tags
+      const goodTags = Array.from(form.querySelectorAll('input[name="goodTags"]:checked'))
+                            .map(checkbox => checkbox.value);
+      const badTags = Array.from(form.querySelectorAll('input[name="badTags"]:checked'))
+                            .map(checkbox => checkbox.value);
 
       const res = await fetch("https://us-central1-YOUR_PROJECT.cloudfunctions.net/submitAnonymousReview", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ inviteID, stars, text, tags: selectedTags })
+        body: JSON.stringify({ inviteID, stars, text, goodTags, badTags })
       });
 
       if (res.ok) {
