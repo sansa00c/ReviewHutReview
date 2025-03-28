@@ -15,83 +15,115 @@
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-functions-compat.js"></script>
 
   <style>
-    body {
-  font-family: sans-serif;
-  max-width: 600px;
-  margin: 2rem auto;
-  padding: 1rem;
-  background-color: #000000;
-  color: white;
-}
-    .header-image {
-      text-align: center;
-      margin-bottom: 1.5rem;
-    }
-    
-    .header-image img {
-      max-width: 100px;
-      height: auto;
-    }
+  body {
+    font-family: sans-serif;
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 1rem;
+    background-color: #000000;
+    color: white;
+  }
 
-    .star-rating-wrapper {
-  direction: ltr;
-  display: flex;
-  justify-content: flex-start;
-}
+  .header-image {
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
 
-.star-rating {
-  font-size: 2rem;
-  direction: rtl;
-  display: flex;
-  gap: 10px;
-  cursor: pointer;
-}
+  .header-image img {
+    max-width: 100px;
+    height: auto;
+  }
 
-    .star-rating input {
-      display: none;
-    }
+  h2 {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+  }
 
-    .star-rating label {
-      color: lightgray;
-      transition: color 0.2s;
-    }
+  form label {
+    display: block;
+    margin-top: 1.25rem;
+    margin-bottom: 0.25rem;
+    font-weight: bold;
+  }
 
-    .star-rating input:checked ~ label,
-    .star-rating label:hover,
-    .star-rating label:hover ~ label {
-      color: gold;
-    }
+  .star-rating-wrapper {
+    direction: ltr;
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 1rem;
+  }
 
-    .tag-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 1rem;
-    }
+  .star-rating {
+    font-size: 2rem;
+    direction: rtl;
+    display: flex;
+    gap: 10px;
+    cursor: pointer;
+  }
 
-    label.tag span {
-  background-color: transparent;
-  color: white;
-  padding: 6px 10px;
-  border-radius: 20px;
-  border: 2px solid white;
-  transition: all 0.2s ease;
-  display: inline-block;
-  cursor: pointer;
-}
+  .star-rating input {
+    display: none;
+  }
 
-/* Checked (selected) tag appearance */
-input[type="checkbox"]:checked + span {
-  background-color: #0030D1; /* trustBlue */
-  color: white;
-  border: 2px solid #0030D1;
-}
+  .star-rating label {
+    color: lightgray;
+    transition: color 0.2s;
+  }
 
-/* Hide native checkboxes */
-input[type="checkbox"] {
-  display: none;
-}
-  </style>
+  .star-rating input:checked ~ label,
+  .star-rating label:hover,
+  .star-rating label:hover ~ label {
+    color: gold;
+  }
+
+  .tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 1rem;
+  }
+
+  label.tag span {
+    background-color: transparent;
+    color: white;
+    padding: 6px 10px;
+    border-radius: 20px;
+    border: 2px solid white;
+    transition: all 0.2s ease;
+    display: inline-block;
+    cursor: pointer;
+  }
+
+  input[type="checkbox"]:checked + span {
+    background-color: #0030D1;
+    color: white;
+    border: 2px solid #0030D1;
+  }
+
+  input[type="checkbox"] {
+    display: none;
+  }
+
+  input[type="radio"] {
+    margin-right: 6px;
+  }
+
+  button[type="submit"] {
+    margin-top: 1.5rem;
+    padding: 0.4rem 1rem;
+    font-weight: bold;
+    border-radius: 6px;
+    border: none;
+    background-color: white;
+    color: black;
+    cursor: pointer;
+  }
+
+  button[type="submit"]:hover {
+    background-color: #f0f0f0;
+  }
+</style>
+
 </head>
 <body>
   <h2>Leave a Review</h2>
