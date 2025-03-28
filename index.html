@@ -4,6 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Leave a Review</title>
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-functions-compat.js"></script>
+
   <style>
     body {
       font-family: sans-serif;
@@ -117,10 +122,21 @@
   </form>
 
   <script>
+    // Your Firebase config (replace with your actual config)
+    const firebaseConfig = {
+      apiKey: "AIzaSyAy7isvF3tKX5e2C8UItBh_lo-o14y_zVE",
+      authDomain: "review-hut-bcff1.firebaseapp.com",
+      projectId: "review-hut-bcff1",
+      appId: "1:901708014175:web:6d6a22a703e94cd311b1ea"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+
     const inviteID = new URLSearchParams(window.location.search).get("invite");
 
     document.getElementById("review-form").addEventListener("submit", async (e) => {
       e.preventDefault();
+
       const form = e.target;
       const stars = form.querySelector('input[name="stars"]:checked')?.value;
 
@@ -129,23 +145,26 @@
         return;
       }
 
-      const goodTags = Array.from(form.querySelectorAll('input[name="goodTags"]:checked'))
-                            .map(checkbox => checkbox.value);
-      const badTags = Array.from(form.querySelectorAll('input[name="badTags"]:checked'))
-                            .map(checkbox => checkbox.value);
+      const goodTags = Array.from(form.querySelectorAll('input[name="goodTags"]:checked')).map(cb => cb.value);
+      const badTags = Array.from(form.querySelectorAll('input[name="badTags"]:checked')).map(cb => cb.value);
 
-      const res = await fetch("https://us-central1-YOUR_PROJECT.cloudfunctions.net/submitAnonymousReview", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ inviteID, stars, goodTags, badTags })
-      });
+      const functions = firebase.functions();
+      const submitReview = functions.httpsCallable("submitAnonymousReview");
 
-      if (res.ok) {
+      try {
+        await submitReview({
+          inviteID,
+          stars,
+          goodTags,
+          badTags,
+          dealType: "Trade" // Optional
+        });
+
         alert("Thanks! Your review was submitted.");
         form.reset();
-      } else {
-        const err = await res.text();
-        alert("Error: " + err);
+      } catch (error) {
+        console.error(error);
+        alert("Error submitting review: " + error.message);
       }
     });
   </script>
