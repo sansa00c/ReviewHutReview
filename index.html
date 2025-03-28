@@ -93,11 +93,18 @@
       cursor: pointer;
     }
 
-    /* Checked (selected) tag appearance */
-    input[type="checkbox"]:checked + span {
+    /* Checked (selected) tag appearance for good tags */
+    input[name="goodTags"]:checked + span {
       background-color: #0030D1; /* trustBlue */
       color: white;
       border: 2px solid #0030D1;
+    }
+
+    /* Checked (selected) tag appearance for bad tags */
+    input[name="badTags"]:checked + span {
+      background-color: #F10404; /* bottomCommentRed */
+      color: white;
+      border: 2px solid #F10404;
     }
 
     /* Hide native checkboxes */
