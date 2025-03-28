@@ -122,7 +122,6 @@
   </form>
 
   <script>
-    // Your Firebase config (replace with your actual config)
     const firebaseConfig = {
       apiKey: "AIzaSyAy7isvF3tKX5e2C8UItBh_lo-o14y_zVE",
       authDomain: "review-hut-bcff1.firebaseapp.com",
@@ -132,7 +131,9 @@
 
     firebase.initializeApp(firebaseConfig);
 
-    const inviteID = new URLSearchParams(window.location.search).get("invite");
+    const urlParams = new URLSearchParams(window.location.search);
+    const inviteID = urlParams.get("invite");
+    const reviewerIDTo = urlParams.get("to");
 
     document.getElementById("review-form").addEventListener("submit", async (e) => {
       e.preventDefault();
@@ -140,8 +141,8 @@
       const form = e.target;
       const stars = form.querySelector('input[name="stars"]:checked')?.value;
 
-      if (!stars) {
-        alert("Please select a star rating.");
+      if (!stars || !inviteID || !reviewerIDTo) {
+        alert("Missing invite ID, reviewer ID, or star rating.");
         return;
       }
 
@@ -157,7 +158,8 @@
           stars,
           goodTags,
           badTags,
-          dealType: "Trade" // Optional
+          reviewerIDTo,
+          dealType: "Trade" // optional
         });
 
         alert("Thanks! Your review was submitted.");
