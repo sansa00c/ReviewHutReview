@@ -4,14 +4,67 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Leave a Review</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      max-width: 600px;
+      margin: 2rem auto;
+      padding: 1rem;
+    }
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    label.tag {
+      background: #f0f0f0;
+      padding: 6px 10px;
+      border-radius: 20px;
+      cursor: pointer;
+    }
+    input[type="checkbox"] {
+      display: none;
+    }
+    input[type="checkbox"]:checked + span {
+      background-color: #007bff;
+      color: white;
+    }
+  </style>
 </head>
 <body>
   <h2>Leave a Review</h2>
+
   <form id="review-form">
-    <label>Stars (1–5):</label><br />
+    <label>Star Rating (1–5):</label><br />
     <input type="number" name="stars" min="1" max="5" required /><br /><br />
-    <label>Review:</label><br />
-    <textarea name="text" rows="4" cols="40" required></textarea><br /><br />
+
+    <label>Select all that apply:</label>
+    <div class="tag-list">
+      <!-- Tags as checkboxes -->
+      <label class="tag"><input type="checkbox" name="tags" value="Fast Shipping" /><span>Fast Shipping</span></label>
+      <label class="tag"><input type="checkbox" name="tags" value="Secure Packaging" /><span>Secure Packaging</span></label>
+      <label class="tag"><input type="checkbox" name="tags" value="Responsive" /><span>Responsive</span></label>
+      <label class="tag"><input type="checkbox" name="tags" value="Informative" /><span>Informative</span></label>
+      <label class="tag"><input type="checkbox" name="tags" value="Free Returns" /><span>Free Returns</span></label>
+      <label class="tag"><input type="checkbox" name="tags" value="Item as Described" /><span>Item as Described</span></label>
+      <label class="tag"><input type="checkbox" name="tags" value="Great Communication" /><span>Great Communication</span></label>
+      <label class="tag"><input type="checkbox" name="tags" value="Trustworthy" /><span>Trustworthy</span></label>
+      <label class="tag"><input type="checkbox" name="tags" value="Fair Pricing" /><span>Fair Pricing</span></label>
+      <label class="tag"><input type="checkbox" name="tags" value="Repeat Buyer/Seller" /><span>Repeat Buyer/Seller</span></label>
+      <label class="tag"><input type="checkbox" name="tags" value="Accurate Photos" /><span>Accurate Photos</span></label>
+      <label class="tag"><input type="checkbox" name="tags" value="Smooth Transaction" /><span>Smooth Transaction</span></label>
+      <label class="tag"><input type="checkbox" name="tags" value="Excellent Condition" /><span>Excellent Condition</span></label>
+      <label class="tag"><input type="checkbox" name="tags" value="Highly Recommended" /><span>Highly Recommended</span></label>
+      <label class="tag"><input type="checkbox" name="tags" value="Quick Response" /><span>Quick Response</span></label>
+      <label class="tag"><input type="checkbox" name="tags" value="Great Deals" /><span>Great Deals</span></label>
+      <label class="tag"><input type="checkbox" name="tags" value="Easy to Work With" /><span>Easy to Work With</span></label>
+      <label class="tag"><input type="checkbox" name="tags" value="Flexible" /><span>Flexible</span></label>
+      <label class="tag"><input type="checkbox" name="tags" value="No Issues" /><span>No Issues</span></label>
+    </div><br />
+
+    <label>Additional Comments:</label><br />
+    <textarea name="text" rows="4" cols="40"></textarea><br /><br />
+
     <button type="submit">Submit Review</button>
   </form>
 
@@ -20,17 +73,23 @@
 
     document.getElementById("review-form").addEventListener("submit", async (e) => {
       e.preventDefault();
-      const stars = e.target.stars.value;
-      const text = e.target.text.value;
+      const form = e.target;
+      const stars = form.stars.value;
+      const text = form.text.value;
+
+      // Get selected tags
+      const selectedTags = Array.from(form.querySelectorAll('input[name="tags"]:checked'))
+                                .map(checkbox => checkbox.value);
 
       const res = await fetch("https://us-central1-YOUR_PROJECT.cloudfunctions.net/submitAnonymousReview", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ inviteID, stars, text })
+        body: JSON.stringify({ inviteID, stars, text, tags: selectedTags })
       });
 
       if (res.ok) {
         alert("Thanks! Your review was submitted.");
+        form.reset();
       } else {
         const err = await res.text();
         alert("Error: " + err);
