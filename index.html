@@ -278,6 +278,35 @@
       alert("Error submitting review: " + error.message);
     }
   });
+
+    function limitCheckboxes(name, limit) {
+    const checkboxes = document.querySelectorAll(`input[name="${name}"]`);
+    let alertShown = false;
+
+    checkboxes.forEach(cb => {
+      cb.addEventListener("change", () => {
+        const checked = Array.from(checkboxes).filter(i => i.checked);
+
+        if (checked.length >= limit) {
+          checkboxes.forEach(i => {
+            if (!i.checked) i.disabled = true;
+          });
+          if (!alertShown) {
+            alert(`You can select up to ${limit} ${name === 'goodTags' ? 'positive' : 'negative'} tags.`);
+            alertShown = true;
+          }
+        } else {
+          checkboxes.forEach(i => i.disabled = false);
+          alertShown = false;
+        }
+      });
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    limitCheckboxes("goodTags", 8);
+    limitCheckboxes("badTags", 8);
+  });
   </script>
 </body>
 </html>
