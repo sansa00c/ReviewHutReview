@@ -235,6 +235,16 @@
   const inviteID = urlParams.get("invite");
   const reviewerIDTo = urlParams.get("to");
 
+  function getOrCreateBrowserID() {
+    const KEY = "reviewHutBrowserID";
+    let browserID = localStorage.getItem(KEY);
+    if (!browserID) {
+      browserID = crypto.randomUUID();
+      localStorage.setItem(KEY, browserID);
+    }
+    return browserID;
+  }
+
   document.getElementById("review-form").addEventListener("submit", async (e) => {
     e.preventDefault();
 
@@ -249,14 +259,15 @@
     const goodTags = Array.from(form.querySelectorAll('input[name="goodTags"]:checked')).map(cb => cb.value);
     const badTags = Array.from(form.querySelectorAll('input[name="badTags"]:checked')).map(cb => cb.value);
 
-    const submitReview = firebase.app().functions().httpsCallable("submitAnonymousReview");
-
     const dealType = form.querySelector('input[name="dealType"]:checked')?.value;
-
     if (!dealType) {
       alert("Please select a deal type.");
       return;
     }
+
+    const browserID = getOrCreateBrowserID();
+
+    const submitReview = firebase.app().functions().httpsCallable("submitAnonymousReview");
 
     const payload = {
       inviteID,
@@ -264,7 +275,8 @@
       goodTags,
       badTags,
       reviewerIDTo,
-      dealType
+      dealType,
+      browserID
     };
 
     console.log("📤 Submitting payload:", payload);
@@ -279,7 +291,7 @@
     }
   });
 
-    function limitCheckboxes(name, limit) {
+  function limitCheckboxes(name, limit) {
     const checkboxes = document.querySelectorAll(`input[name="${name}"]`);
     let alertShown = false;
 
@@ -307,6 +319,6 @@
     limitCheckboxes("goodTags", 8);
     limitCheckboxes("badTags", 8);
   });
-  </script>
+</script>
 </body>
 </html>
